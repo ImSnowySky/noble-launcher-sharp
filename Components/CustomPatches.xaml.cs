@@ -27,7 +27,7 @@ namespace NobleLauncher.Components
             var id = Int32.Parse(target.Tag.ToString());
             var patch = Static.CustomPatches.GetPatchByID(id);
             patch.ChangeSelectionTo(!patch.Selected);
-            Settings.ToggleCustomPatchSelection(patch.LocalPath);
+            Settings.GetInstance().ToggleCustomPatchSelection(patch.LocalPath);
             CustomPatchesView.Items.Refresh();
             EventDispatcher.Dispatch(EventDispatcherEvent.SettingsRefresh);
         }

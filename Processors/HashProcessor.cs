@@ -4,9 +4,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace NobleLauncher.Models
+namespace NobleLauncher.Processors
 {
-    static class HashCalculator
+    static class HashProcessor
     {
         private static readonly int MAX_BUFFER_SIZE = 262144; //256 kb;
         public static async Task<string> CalcCRC32Hash(IUpdateable patch, Action<long> OnBlockRead) {

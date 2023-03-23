@@ -240,18 +240,20 @@
     <Compile Include="Components\Updater.xaml.cs">
       <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Globals\Settings.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Models\Files\FileDownloader.cs" />
-    <Compile Include="Models\Files\HashCalculator.cs" />
+    <Compile Include="Processors\HashProcessor.cs" />
     <Compile Include="Models\Common\EventDispatcher.cs" />
     <Compile Include="Globals\Static.cs" />
     <Compile Include="Models\Files\FileModel.cs" />
-    <Compile Include="Models\Files\FileWithDefaultDictionaryContentModel.cs" />
+    <Compile Include="Models\Files\DictionaryFileModel.cs" />
     <Compile Include="Models\Patches\CustomPatchModel.cs" />
     <Compile Include="Models\Patches\PatchModel.cs" />
+    <Compile Include="Processors\UserControlledSettingsFileProcessor.cs" />
     <Compile Include="Structures\EventDispatcherEvent.cs" />
     <Compile Include="Structures\NobleResponse.cs" />
+    <Compile Include="Structures\UserControlledSettings.cs" />
     <Compile Include="Structures\SitePost.cs" />
     <Compile Include="Structures\SitePostAuthor.cs" />
     <Compile Include="Structures\SliderElement.cs" />

@@ -33,7 +33,7 @@ namespace NobleLauncher.Models
                     return new StreamReader(responseStream).ReadToEnd();
                 }
                 catch (Exception e) {
-                    if (Settings.ENABLE_DEBUG_MODE) {
+                    if (Settings.EnableDebugMode) {
                         MessageBox.Show(e.Message);
                     }
                     errMsg = $"Error: {e.Message}";

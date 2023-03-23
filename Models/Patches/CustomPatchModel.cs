@@ -15,7 +15,7 @@ namespace NobleLauncher.Models
         }
 
         public void GetSelectionFromSettings() {
-            var selectCustomPatchesLocalPaths = Settings.GetSelectedCustomPatches();
+            var selectCustomPatchesLocalPaths = Settings.SelectedCustomPatches;
             Parallel.For(0, selectCustomPatchesLocalPaths.Count, (i) => {
                 if (selectCustomPatchesLocalPaths[i] == LocalPath) {
                     ChangeSelectionTo(true);

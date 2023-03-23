@@ -57,7 +57,7 @@ namespace NobleLauncher.Models
             }
         }
 
-        public static Task DownloadFile(string from, string to, Action<long, int> onChunkLoaded) {
+        public static Task DownloadFileLib(string from, string to, Action<long, int> onChunkLoaded) {
             if (downloader != null) {
                 throw new AccessViolationException("Downloader уже существует");
             }
@@ -105,7 +105,7 @@ namespace NobleLauncher.Models
             return downloader.DownloadFileTaskAsync(from, to);
         }
 
-        public static Task DownloadFileNet(string from, string to, Action<long, int> onChunkLoaded) {
+        public static Task DownloadFile(string from, string to, Action<long, int> onChunkLoaded) {
             if (CurrentWebClient != null) {
                 throw new AccessViolationException("Web client уже существует");
             }
