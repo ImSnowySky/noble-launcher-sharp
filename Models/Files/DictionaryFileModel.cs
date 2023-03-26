@@ -10,7 +10,7 @@ namespace NobleLauncher.Models
     public class DictionaryFileModel : FileModel
     {
         public Dictionary<string, string> DefaultContent;
-        public DictionaryFileModel(string RelativePath, Dictionary<string, string> DefaultContent) : base(RelativePath) {
+        public DictionaryFileModel(string PathToFile, Dictionary<string, string> DefaultContent) : base(PathToFile) {
             this.DefaultContent = DefaultContent;
             CreateIfNotExist();
             FillWithDefaults();
@@ -56,9 +56,9 @@ namespace NobleLauncher.Models
                     }
                 }
             }
-            catch(Exception e) {
+            catch(Exception E) {
                 if (Settings.EnableDebugMode) {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(E.Message);
                 }
                 throw new Exception($"Не удалось прочитать файл {PathToFile} как экземпляр Dictionary");
             }
@@ -81,9 +81,9 @@ namespace NobleLauncher.Models
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception E) {
                 if (Settings.EnableDebugMode) {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(E.Message);
                 }
                 throw new Exception($"Не удалось записать содержимое в файл {PathToFile}");
             }

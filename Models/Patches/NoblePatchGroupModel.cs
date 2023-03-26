@@ -10,8 +10,8 @@ namespace NobleLauncher.Models
             List = new List<PatchType>(Patches);
         }
 
-        public PatchType GetPatchByID(int id) {
-            return List[id];
+        public PatchType GetPatchByID(int ID) {
+            return List[ID];
         }
     }
 }

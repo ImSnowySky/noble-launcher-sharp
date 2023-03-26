@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using NoblegardenLauncherSharp.Processors;
+using System.IO;
+using NobleLauncher.Models;
 using NobleLauncher.Structures;
 
 namespace NobleLauncher.Globals
@@ -11,6 +12,8 @@ namespace NobleLauncher.Globals
         private readonly string AppVersionPrivate = "2.0.0";
         private readonly string WorkingDirPrivate = @"C:\SSD-Games";
         private readonly string NobleDomainPrivate = "https://noblegarden.net";
+        private readonly UserSettingsFileModel UserSettingsFile;
+
         private bool EnableTLSPrivate = false;
         private bool EnableDebugModePrivate = false;
         private List<string> SelectedCustomPatchesPrivate = new List<string>();
@@ -39,9 +42,12 @@ namespace NobleLauncher.Globals
             get => GetInstance().SelectedCustomPatchesPrivate;
         }
 
-        private Settings() { }
+        private Settings() {
+            var PathToSettingsFile = Path.Combine(WorkingDirPrivate, "launcher-config.ini");
+            UserSettingsFile = new UserSettingsFileModel(PathToSettingsFile);
+        }
         public void Parse() {
-            var UserControledSettings = UserControlledSettingsFileProcessor.Parse();
+            var UserControledSettings = UserSettingsFile.GetCurrentSettings();
             EnableTLSPrivate = UserControledSettings.EnableTLS;
             EnableDebugModePrivate = UserControledSettings.EnableDebugMode;
             SelectedCustomPatchesPrivate = UserControledSettings.SelectedCustomPatches;
@@ -62,7 +68,7 @@ namespace NobleLauncher.Globals
                 SelectedCustomPatches.Add(PatchName);
             }
 
-            UserControlledSettingsFileProcessor.UpdateSettings(new UserControlledSettings(
+            UserSettingsFile.UpdateSettings(new UserControlledSettings(
                 SelectedCustomPatches,
                 EnableTLS,
                 EnableDebugMode

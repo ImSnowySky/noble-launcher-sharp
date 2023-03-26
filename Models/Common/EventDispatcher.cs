@@ -8,35 +8,35 @@ namespace NobleLauncher.Models
     {
         private static readonly Dictionary<EventDispatcherEvent, List<Action>> ActionHandlers = new Dictionary<EventDispatcherEvent, List<Action>>();
 
-        public static void CreateSubscription(EventDispatcherEvent subscribeTo, Action action) {
-            if (!ActionHandlers.ContainsKey(subscribeTo)) {
-                ActionHandlers[subscribeTo] = new List<Action>();
+        public static void CreateSubscription(EventDispatcherEvent SubscribeTo, Action Action) {
+            if (!ActionHandlers.ContainsKey(SubscribeTo)) {
+                ActionHandlers[SubscribeTo] = new List<Action>();
             }
-            ActionHandlers[subscribeTo].Add(action);
+            ActionHandlers[SubscribeTo].Add(Action);
         }
 
-        public static void RemoveSubscription(EventDispatcherEvent unsubscribeFrom, Action action) {
-            var indexOfAction = ActionHandlers[unsubscribeFrom].FindIndex(handler => handler.Equals(action));
+        public static void RemoveSubscription(EventDispatcherEvent UnsubscribeFrom, Action Action) {
+            var indexOfAction = ActionHandlers[UnsubscribeFrom].FindIndex(handler => handler.Equals(Action));
             if (indexOfAction == -1)
                 return;
 
-            ActionHandlers[unsubscribeFrom].RemoveAt(indexOfAction);
+            ActionHandlers[UnsubscribeFrom].RemoveAt(indexOfAction);
         }
 
-        public static void Dispatch(EventDispatcherEvent dispatchedEvent) {
-            if (!ActionHandlers.ContainsKey(dispatchedEvent)) {
-                Console.WriteLine("Dispatcher key not found: " + dispatchedEvent);
+        public static void Dispatch(EventDispatcherEvent DispatchedEvent) {
+            if (!ActionHandlers.ContainsKey(DispatchedEvent)) {
+                Console.WriteLine("Dispatcher key not found: " + DispatchedEvent);
                 return;
             }
-            if (ActionHandlers[dispatchedEvent].Count == 0) {
-                Console.WriteLine("Dispatcher handler not found: " + dispatchedEvent);
+            if (ActionHandlers[DispatchedEvent].Count == 0) {
+                Console.WriteLine("Dispatcher handler not found: " + DispatchedEvent);
                 return;
             }
-            ActionHandlers[dispatchedEvent].ForEach(action => action());
+            ActionHandlers[DispatchedEvent].ForEach(action => action());
         }
 
-        public static void RemoveAllSubscriptionFromEvent(EventDispatcherEvent unsubscribeFrom) {
-            ActionHandlers[unsubscribeFrom].Clear();
+        public static void RemoveAllSubscriptionFromEvent(EventDispatcherEvent UnsubscribeFrom) {
+            ActionHandlers[UnsubscribeFrom].Clear();
         }
 
         public static void RemoveAllSubscriptions() {

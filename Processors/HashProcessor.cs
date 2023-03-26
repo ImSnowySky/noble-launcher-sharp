@@ -9,16 +9,16 @@ namespace NobleLauncher.Processors
     static class HashProcessor
     {
         private static readonly int MAX_BUFFER_SIZE = 262144; //256 kb;
-        public static async Task<string> CalcCRC32Hash(IUpdateable patch, Action<long> OnBlockRead) {
+        public static async Task<string> CalcCRC32Hash(IUpdateable Patch, Action<long> OnBlockRead) {
             uint hash = 0u;
             var buffer = new byte[MAX_BUFFER_SIZE];
 
-            if (!File.Exists(patch.FullPath)) {
+            if (!File.Exists(Patch.FullPath)) {
                 return "";
             }
 
             await Task.Run(() => {
-                using (var f = File.OpenRead(patch.FullPath)) {
+                using (var f = File.OpenRead(Patch.FullPath)) {
                     int count = 0;
                     while ((count = f.Read(buffer, 0, buffer.Length)) != 0) {
                         hash = Crc32Algorithm.Append(hash, buffer, 0, count);

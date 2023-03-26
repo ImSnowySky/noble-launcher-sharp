@@ -250,7 +250,8 @@
     <Compile Include="Models\Files\DictionaryFileModel.cs" />
     <Compile Include="Models\Patches\CustomPatchModel.cs" />
     <Compile Include="Models\Patches\PatchModel.cs" />
-    <Compile Include="Processors\UserControlledSettingsFileProcessor.cs" />
+    <Compile Include="Models\Files\UserSettingsFileModel.cs" />
+    <Compile Include="Processors\StringValueConverter.cs" />
     <Compile Include="Structures\EventDispatcherEvent.cs" />
     <Compile Include="Structures\NobleResponse.cs" />
     <Compile Include="Structures\UserControlledSettings.cs" />

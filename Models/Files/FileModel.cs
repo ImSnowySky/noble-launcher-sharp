@@ -7,16 +7,10 @@ namespace NobleLauncher.Models
 {
     public class FileModel
     {
-        protected static readonly string WORKING_DIR = Settings.WorkingDir;
         protected string PathToFile;
 
-        public FileModel(string RelativePath) {
-            PathToFile = Path.GetFullPath(
-                Path.Combine(
-                    WORKING_DIR,
-                    RelativePath
-                )
-            );
+        public FileModel(string PathToFile) {
+            this.PathToFile = Path.GetFullPath(PathToFile);
         }
 
         protected bool Exists() {
