@@ -1,5 +1,6 @@
 ﻿using NobleLauncher.Globals;
 using NobleLauncher.Interfaces;
+using NobleLauncher.Processors;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace NobleLauncher.Models
         public string LocalHash { get; set; }
         public bool Selected { get; set; }
         public string FullPath {
-            get => Settings.WORKING_DIR + "/" + LocalPath;
+            get => Settings.WorkingDir + "/" + LocalPath;
         }
 
         public string PathToTMP {
@@ -72,7 +73,7 @@ namespace NobleLauncher.Models
         }
 
         public Task<string> CalcCRC32Hash(Action<long> OnBlockRead) {
-            return HashCalculator.CalcCRC32Hash(this, OnBlockRead);
+            return HashProcessor.CalcCRC32Hash(this, OnBlockRead);
         }
 
         public Task<long> GetRemoteSize() {

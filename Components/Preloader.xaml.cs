@@ -34,12 +34,12 @@ namespace NobleLauncher.Components
 
         public void Migration() {
             CurrentLoadingStepView.Text = "Мигрируем со старой версии";
-            if (Directory.Exists(Settings.WORKING_DIR + "/Launcher")) {
-                Directory.Delete(Settings.WORKING_DIR + "/Launcher", true);
+            if (Directory.Exists(Settings.WorkingDir + "/Launcher")) {
+                Directory.Delete(Settings.WorkingDir + "/Launcher", true);
             }
 
-            if (File.Exists(Settings.WORKING_DIR + "/Noblegarden Launcher.exe")) {
-                File.Delete(Settings.WORKING_DIR + "/Noblegarden Launcher.exe");
+            if (File.Exists(Settings.WorkingDir + "/Noblegarden Launcher.exe")) {
+                File.Delete(Settings.WorkingDir + "/Noblegarden Launcher.exe");
             }
         }
 
@@ -48,7 +48,7 @@ namespace NobleLauncher.Components
             CurrentLoadingProgressView.Opacity = 1;
             await FileDownloader.DownloadFile(
                 linkToLauncher,
-                Settings.WORKING_DIR + "/NobleLauncher.exe.tmp",
+                Settings.WorkingDir + "/NobleLauncher.exe.tmp",
                 (chunkSize, percentage) => {
                     CurrentLoadingProgressView.Value = percentage;
                 }
@@ -93,7 +93,7 @@ namespace NobleLauncher.Components
             if (actualLauncherVersion == "") {
                 Static.ShutdownWithError("Сервер не вернул актуальной версии лаунчера");
             }
-            if (actualLauncherVersion != Settings.LAUNCHER_VERSION) {
+            if (actualLauncherVersion != Settings.AppVersion) {
                 await UpdateLauncher((string)launcherVersionResponse.FormattedData.link);
             }
         }

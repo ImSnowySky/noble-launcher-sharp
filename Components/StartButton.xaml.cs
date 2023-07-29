@@ -24,7 +24,7 @@ namespace NobleLauncher.Components
         }
 
         private bool IsEXEPresented() {
-            string pathToEXE = Settings.WORKING_DIR + "/Wow.exe";
+            string pathToEXE = Settings.WorkingDir + "/Wow.exe";
             return File.Exists(pathToEXE);
         }
 
@@ -40,10 +40,10 @@ namespace NobleLauncher.Components
             if (!IsEXEPresented())
                 return;
 
-            if (Settings.WORKING_DIR == ".") {
+            if (Settings.WorkingDir == ".") {
                 Process.Start("Wow.exe");
             } else {
-                Process.Start(Settings.WORKING_DIR + "/Wow.exe");
+                Process.Start(Settings.WorkingDir + "/Wow.exe");
             }
         }
     }

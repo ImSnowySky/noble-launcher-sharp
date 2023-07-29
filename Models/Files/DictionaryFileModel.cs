@@ -7,27 +7,13 @@ using System.Windows.Forms;
 
 namespace NobleLauncher.Models
 {
-    public class FileWithDefaultDictionaryContentModel : FileModel
+    public class DictionaryFileModel : FileModel
     {
         public Dictionary<string, string> DefaultContent;
-        public FileWithDefaultDictionaryContentModel(string RelativePath, Dictionary<string, string> DefaultContent) : base(RelativePath) {
+        public DictionaryFileModel(string PathToFile, Dictionary<string, string> DefaultContent) : base(PathToFile) {
             this.DefaultContent = DefaultContent;
-            CreateFileIfNotExist();
+            CreateIfNotExist();
             FillWithDefaults();
-        }
-
-        private void CreateFileIfNotExist() {
-            if (Exists())
-                return;
-            try {
-                File.Create(PathToFile).Close();
-            }
-            catch (Exception e) {
-                if (Settings.ENABLE_DEBUG_MODE) {
-                    MessageBox.Show(e.Message);
-                }
-                throw new Exception($"Не удалось создать файл {PathToFile}");
-            }
         }
 
         protected void FillWithDefaults() {
@@ -44,14 +30,14 @@ namespace NobleLauncher.Models
                 }
             }
             catch (Exception e) {
-                if (Settings.ENABLE_DEBUG_MODE) {
+                if (Settings.EnableDebugMode) {
                     MessageBox.Show(e.Message);
                 }
                 throw new Exception($"Не удалось заполнить файл {PathToFile} стандартными значениями");
             }
         }
 
-        public Dictionary<string, string> ReadAsDictionary() {
+        public Dictionary<string, string> Read() {
             var content = new Dictionary<string, string>();
             if (!Exists() || !HasAnyContent())
                 return content;
@@ -70,9 +56,9 @@ namespace NobleLauncher.Models
                     }
                 }
             }
-            catch(Exception e) {
-                if (Settings.ENABLE_DEBUG_MODE) {
-                    MessageBox.Show(e.Message);
+            catch(Exception E) {
+                if (Settings.EnableDebugMode) {
+                    MessageBox.Show(E.Message);
                 }
                 throw new Exception($"Не удалось прочитать файл {PathToFile} как экземпляр Dictionary");
             }
@@ -80,7 +66,7 @@ namespace NobleLauncher.Models
             return content;
         }
 
-        public void WriteDictionary(Dictionary<string, string> Dict) {
+        public void Rewrite(Dictionary<string, string> Dict) {
             if (!Exists()) return;
 
             File.WriteAllText(PathToFile, "");
@@ -95,9 +81,9 @@ namespace NobleLauncher.Models
                     }
                 }
             }
-            catch (Exception e) {
-                if (Settings.ENABLE_DEBUG_MODE) {
-                    MessageBox.Show(e.Message);
+            catch (Exception E) {
+                if (Settings.EnableDebugMode) {
+                    MessageBox.Show(E.Message);
                 }
                 throw new Exception($"Не удалось записать содержимое в файл {PathToFile}");
             }

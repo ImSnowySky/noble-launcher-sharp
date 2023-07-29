@@ -12,7 +12,7 @@ namespace NobleLauncher.Models
 
         public static SiteAPIModel Instance() {
             if (instance == null) {
-                instance = new SiteAPIModel(Settings.NOBLE_DOMAIN);
+                instance = new SiteAPIModel(Settings.NobleDomain);
             }
 
             return instance;

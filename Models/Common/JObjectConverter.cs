@@ -26,9 +26,9 @@ namespace NobleLauncher.Models
             return convertedList;
         }
 
-        private static PatchModel ConvertTokenToPatch(JToken token) {
+        private static PatchModel ConvertTokenToPatch(JToken Token) {
             PatchModel patch = new PatchModel();
-            var reader = new JTokenReader(token);
+            var reader = new JTokenReader(Token);
             bool isObjectStarted = false;
 
             while (reader.Read()) {

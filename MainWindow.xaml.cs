@@ -10,13 +10,13 @@ namespace NobleLauncher {
     {
         public MainWindow()
         {
-            Settings.Parse();
+            Settings.GetInstance().Parse();
             ToggleTLS();
             InitializeComponent();
         }
 
         private void ToggleTLS() {
-            if (Settings.ENABLE_TLS)
+            if (Settings.EnableTLS)
                 return;
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

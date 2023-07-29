@@ -31,8 +31,8 @@
     <SupportUrl>https://noblegarden.net</SupportUrl>
     <ProductName>Noble auncher</ProductName>
     <PublisherName>Fr.Snowy</PublisherName>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
@@ -71,7 +71,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -85,6 +85,9 @@
     </Reference>
     <Reference Include="Crc32.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dc0b95cf99bf4e99, processorArchitecture=MSIL">
       <HintPath>packages\Crc32.NET.1.2.0\lib\net20\Crc32.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Downloader, Version=3.0.4.0, Culture=neutral, PublicKeyToken=844973e732f6cdf4, processorArchitecture=MSIL">
+      <HintPath>packages\Downloader.3.0.4\lib\net452\Downloader.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -237,18 +240,21 @@
     <Compile Include="Components\Updater.xaml.cs">
       <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Globals\Settings.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Models\Files\FileDownloader.cs" />
-    <Compile Include="Models\Files\HashCalculator.cs" />
+    <Compile Include="Processors\HashProcessor.cs" />
     <Compile Include="Models\Common\EventDispatcher.cs" />
     <Compile Include="Globals\Static.cs" />
     <Compile Include="Models\Files\FileModel.cs" />
-    <Compile Include="Models\Files\FileWithDefaultDictionaryContentModel.cs" />
+    <Compile Include="Models\Files\DictionaryFileModel.cs" />
     <Compile Include="Models\Patches\CustomPatchModel.cs" />
     <Compile Include="Models\Patches\PatchModel.cs" />
+    <Compile Include="Models\Files\UserSettingsFileModel.cs" />
+    <Compile Include="Processors\StringValueConverter.cs" />
     <Compile Include="Structures\EventDispatcherEvent.cs" />
     <Compile Include="Structures\NobleResponse.cs" />
+    <Compile Include="Structures\UserControlledSettings.cs" />
     <Compile Include="Structures\SitePost.cs" />
     <Compile Include="Structures\SitePostAuthor.cs" />
     <Compile Include="Structures\SliderElement.cs" />
