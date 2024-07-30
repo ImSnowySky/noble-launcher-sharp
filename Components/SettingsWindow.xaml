@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:components="clr-namespace:NobleLauncher.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="545" d:DesignWidth="280">
-    <Grid Name="SettingsView" Margin="284,0,0,0">
-        <Rectangle Fill="#FFFAFAFA" Width="280">
+             d:DesignHeight="545" d:DesignWidth="560">
+    <Grid Name="SettingsView" Margin="564,0,0,0">
+        <Rectangle Fill="#FFFAFAFA" Width="560">
             <Rectangle.Effect>
                 <DropShadowEffect Direction="180" Opacity="0.2"/>
             </Rectangle.Effect>
@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="8"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Настройки" FontSize="20" Foreground="#FF091526" FontFamily="Segoe UI Black" />
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Text="Настройки" FontSize="20" Foreground="#FF091526" FontFamily="Segoe UI Black" />
                 <components:CustomPatches Grid.Row="3" Grid.Column="1"/>
             </Grid>
         </ScrollViewer>
@@ -34,14 +34,14 @@
     <UserControl.Resources>
         <Storyboard x:Key="ShowSettings">
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="SettingsView" Storyboard.TargetProperty="Margin">
-                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="284,0,0,0" />
+                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="564,0,0,0" />
                 <SplineThicknessKeyFrame KeyTime="00:00:0.125" Value="0,0,0,0" />
             </ThicknessAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideSettings">
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="SettingsView" Storyboard.TargetProperty="Margin">
                 <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
-                <SplineThicknessKeyFrame KeyTime="00:00:0.125" Value="284,0,0,0" />
+                <SplineThicknessKeyFrame KeyTime="00:00:0.125" Value="564,0,0,0" />
             </ThicknessAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>

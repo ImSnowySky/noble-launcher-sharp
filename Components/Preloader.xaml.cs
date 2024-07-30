@@ -27,9 +27,9 @@ namespace NobleLauncher.Components
             ModalBackgroundView.Opacity = 1;
 
             Migration();
-            await CheckLauncherVersion();
             await GetBasePatches();
             PlaySuccessLoadAnimation();
+            EventDispatcher.Dispatch(EventDispatcherEvent.CompletePreload);
         }
 
         public void Migration() {
@@ -43,60 +43,6 @@ namespace NobleLauncher.Components
             }
         }
 
-        private async Task UpdateLauncher(string linkToLauncher) {
-            CurrentLoadingStepView.Text = "Скачиваем актуальную версию лаунчера";
-            CurrentLoadingProgressView.Opacity = 1;
-            await FileDownloader.DownloadFile(
-                linkToLauncher,
-                Settings.WORKING_DIR + "/NobleLauncher.exe.tmp",
-                (chunkSize, percentage) => {
-                    CurrentLoadingProgressView.Value = percentage;
-                }
-            );
-
-            using (var sw = File.CreateText("focus.vbs")) {
-                sw.WriteLine("Dim WshShell");
-                sw.WriteLine("Set WshShell = WScript.CreateObject(\"WScript.Shell\")");
-                sw.WriteLine("Dim ARGS");
-                sw.WriteLine("set ARGS = WScript.Arguments");
-                sw.WriteLine("WshShell.AppActivate(ARGS.Item(0))");
-                sw.WriteLine("WshShell.SendKeys(\"~\")");
-                sw.WriteLine("WScript.Quit(0)");
-            }
-
-            var process = new Process();
-            var startInfo = new ProcessStartInfo();
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            var cmds = new string[]{
-                "/C timeout 2",
-                "del NobleLauncher.exe",
-                "rename NobleLauncher.exe.tmp NobleLauncher.exe",
-                "start NobleLauncher.exe",
-                "timeout 1",
-                "focus.vbs \"Лаунчер Noblegarden\"",
-                "del focus.vbs"
-            };
-            startInfo.Arguments = String.Join("&", cmds);
-            process.StartInfo = startInfo;
-            process.Start();
-
-            Static.Shutdown();
-        }
-
-        public async Task CheckLauncherVersion() {
-            if (UpdateServerAPI == null)
-                return;
-            CurrentLoadingStepView.Text = "Сверяем версии лаунчеров";
-            var launcherVersionResponse = await UpdateServerAPI.GetActualLauncherVersion();
-            string actualLauncherVersion = (string)launcherVersionResponse.FormattedData.version;
-            if (actualLauncherVersion == "") {
-                Static.ShutdownWithError("Сервер не вернул актуальной версии лаунчера");
-            }
-            if (actualLauncherVersion != Settings.LAUNCHER_VERSION) {
-                await UpdateLauncher((string)launcherVersionResponse.FormattedData.link);
-            }
-        }
         private async Task GetBasePatches() {
             CurrentLoadingStepView.Text = "Получаем список патчей";
             var defaultPatchesResponse = await UpdateServerAPI.GetBasePatches();

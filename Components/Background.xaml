@@ -6,29 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="900">
     <Grid Width="900" Height="600" Background="White">
-        <Image Name ="BgImage" Stretch="Fill" Source="../Images/bg.jpg" Height="700" VerticalAlignment="Top" Width="1400">
-            <Image.Triggers>
-                <EventTrigger RoutedEvent="Image.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ThicknessAnimationUsingKeyFrames 
-                                    Storyboard.TargetName="BgImage" 
-                                    Storyboard.TargetProperty="Margin"
-                                    RepeatBehavior="Forever"
-                                    BeginTime="00:00:00"
-                                    AutoReverse="True"
-                                >
-                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:16" Value="-250,-50,0,0" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:24" Value="-150,-80,0,0" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:30" Value="-50,-50,0,0" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:36" Value="0,0,0,0" />
-                            </ThicknessAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Image.Triggers>
-        </Image>
+        <Image Name ="BgImage" Stretch="Fill" Source="../Images/bg.jpg" Height="700" VerticalAlignment="Top" Width="1400"/>
         <Rectangle>
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

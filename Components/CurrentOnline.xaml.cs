@@ -23,23 +23,32 @@ namespace NobleLauncher.Components
         }
 
         private async Task DrawCurrentOnline() {
-            var onlineResponse = await SiteAPI.GetOnlineCount();
-            var wordForms = new string[] { "игрок", "игрока", "игроков" };
-            string text = "Не найдено";
-            if (onlineResponse.IsOK) {
-                try {
-                    int playersCount = Int32.Parse(onlineResponse.FormattedData);
-                    string wordForm = Static.GetRightWordForm(playersCount, wordForms);
-                    text = $"{playersCount} {wordForm}";
+            while (true)
+            {
+                var onlineResponse = await SiteAPI.GetOnlineCount();
+                var wordForms = new string[] { "игрок", "игрока", "игроков" };
+                string text = "Не найдено";
+                if (onlineResponse.IsOK)
+                {
+                    try
+                    {
+                        int playersCount = Int32.Parse(onlineResponse.FormattedData);
+                        string wordForm = Static.GetRightWordForm(playersCount, wordForms);
+                        text = $"{playersCount} {wordForm}";
+                    }
+                    catch
+                    {
+                        text = onlineResponse.FormattedData;
+                    }
                 }
-                catch {
-                    text = onlineResponse.FormattedData;
-                }
-            }
 
-            Static.InUIThread(() => {
-                CurrentOnlineText.Text = text;
-            });
+                Static.InUIThread(() =>
+                {
+                    CurrentOnlineText.Text = text;
+                });
+
+                await Task.Delay(60000/*milliseconds*/);
+            }
         }
     }
 }

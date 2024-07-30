@@ -29,7 +29,8 @@
             VerticalAlignment="Center"
             IsHitTestVisible="False"
             Panel.ZIndex="2"
-            Opacity="0"
+            Opacity="0.5"
+            Visibility="Hidden"
         />
         <TextBlock
             Name="UpdateButtonTextView"
@@ -43,8 +44,9 @@
             FontWeight="Bold"
             FontSize="18"
             Opacity="1"
+            Visibility="Visible"
         >
-            Проверить
+            Обновить
         </TextBlock>
     </Grid>
 </UserControl>

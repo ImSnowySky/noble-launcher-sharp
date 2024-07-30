@@ -17,14 +17,14 @@ namespace NobleLauncher.Components
 
         public void StartUpdate(object sender, MouseButtonEventArgs e) {
             EventDispatcher.Dispatch(EventDispatcherEvent.StartUpdate);
-            UpdateButtonTextView.Opacity = 0;
-            UpdateButtonPreloaderView.Opacity = 0.5;
+            UpdateButtonTextView.Visibility = System.Windows.Visibility.Hidden;
+            UpdateButtonPreloaderView.Visibility = System.Windows.Visibility.Visible;
             UpdateButtonContainerView.IsHitTestVisible = false;
         }
 
         public void UpdateCompleted() {
-            UpdateButtonTextView.Opacity = 1;
-            UpdateButtonPreloaderView.Opacity = 0;
+            UpdateButtonTextView.Visibility = System.Windows.Visibility.Visible;
+            UpdateButtonPreloaderView.Visibility = System.Windows.Visibility.Hidden;
             UpdateButtonContainerView.IsHitTestVisible = true;
         }
     }

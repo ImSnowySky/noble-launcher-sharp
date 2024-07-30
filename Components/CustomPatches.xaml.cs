@@ -16,9 +16,10 @@ namespace NobleLauncher.Components
         public CustomPatches() {
             InitializeComponent();
             Task.Run(() => GetAndDrawCustomPatches());
+            Task.Run(() => GetAndDrawBasePatches());
         }
 
-        private void OpenCustomPatchLink(object sender, MouseButtonEventArgs e) {
+        private void OpenPatchLink(object sender, MouseButtonEventArgs e) {
             Static.OpenLinkFromTag(sender, e);
         }
 
@@ -31,6 +32,7 @@ namespace NobleLauncher.Components
             CustomPatchesView.Items.Refresh();
             EventDispatcher.Dispatch(EventDispatcherEvent.SettingsRefresh);
         }
+
         private async Task GetAndDrawCustomPatches() {
             var customPatchesResponse = await UpdateServerAPI.GetCustomPatches();
             var patchesInfo = customPatchesResponse.FormattedData;
@@ -39,6 +41,17 @@ namespace NobleLauncher.Components
 
             Static.InUIThread(() => {
                 CustomPatchesView.ItemsSource = Static.CustomPatches.List;
+            });
+        }
+
+        private async Task GetAndDrawBasePatches()
+        {
+            var basePatchesResponse = await UpdateServerAPI.GetBasePatches();
+            var patchesInfo = basePatchesResponse.FormattedData;
+            List<NecessaryPatchModel> basePatches = JObjectConverter.ConvertToNecessaryPatchesList(patchesInfo);
+            Static.Patches = new NoblePatchGroupModel<NecessaryPatchModel>(basePatches);
+            Static.InUIThread(() => {
+                NecessaryPatchesView.ItemsSource = Static.Patches.List;
             });
         }
     }

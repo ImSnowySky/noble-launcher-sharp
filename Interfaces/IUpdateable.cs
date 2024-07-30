@@ -12,8 +12,10 @@ namespace NobleLauncher.Interfaces
         string LocalHash { get; set; }
         string RemoteHash { get; set; }
         long GetPathByteSize();
-        Task<string> CalcCRC32Hash(Action<long> OnBlockRead);
+        DateTime GetLastModified();
+        string CalcCRC32Hash(Action<long> OnBlockRead);
         Task<long> GetRemoteSize();
+        Task<DateTime> GetRemoteLastModified();
         Task LoadUpdated(Action<long, int> OnChunkLoaded);
     }
 }

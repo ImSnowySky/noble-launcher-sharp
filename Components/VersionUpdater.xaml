@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="NobleLauncher.Components.VersionUpdater"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NobleLauncher.Components"
+             xmlns:globals="clr-namespace:NobleLauncher.Globals"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="VersionTextBlock"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                TextAlignment="Left"
+                Text="{x:Static globals:Settings.LAUNCHER_VERSION}"
+                Foreground="#FFFFFFFF"
+                FontFamily="Corbel"
+                IsHitTestVisible="False"
+                FontSize="10"
+                Margin="0,0,0,12"
+             />
+
+        <TextBlock
+            Name="AutoUpdateTextBlock"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            TextAlignment="Left"
+            Text="[Обновить автоматически]"
+            MouseLeftButtonUp="AutoUpdateLauncher"
+            FontFamily="Corbel"
+            FontSize="10"
+            Margin="0,0,0,12"
+            Grid.Row="0"
+            Grid.Column="2"
+         >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#FF198BFF"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <TextBlock
+            Name="OrTextBlock"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            TextAlignment="Left"
+            Text="или"
+            Foreground="#FFFFFFFF"
+            FontFamily="Corbel"
+            IsHitTestVisible="False"
+            FontSize="10"
+            Margin="0,0,0,12"
+            Grid.Row="0" 
+            Grid.Column="4"
+         />
+
+        <TextBlock
+            Name="ManualDownloadTextBlock"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            TextAlignment="Left"
+            Text="[Скачать актуальную версию]"
+            MouseLeftButtonUp="DownloadLauncher"
+            FontFamily="Corbel"
+            FontSize="10"
+            Margin="0,0,0,12"
+            Grid.Row="0"
+            Grid.Column="6"
+         >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#FF198BFF"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+</UserControl>

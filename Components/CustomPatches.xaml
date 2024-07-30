@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NobleLauncher.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="260">
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="520">
     <Border BorderBrush="#FF062131" BorderThickness="2" Grid.Row="3" Grid.Column="1" CornerRadius="4">
         <Grid>
             <Grid.RowDefinitions>
@@ -15,6 +15,8 @@
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="12"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -44,7 +46,7 @@
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="8"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Path=Name}" Tag="{Binding Path=RemotePath}" MouseLeftButtonUp="OpenCustomPatchLink" FontSize="14" FontFamily="Corbel" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" FontWeight="Bold"  TextWrapping="WrapWithOverflow">
+                            <TextBlock Text="{Binding Path=Name}" Tag="{Binding Path=RemotePath}" MouseLeftButtonUp="OpenPatchLink" FontSize="14" FontFamily="Corbel" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" FontWeight="Bold"  TextWrapping="WrapWithOverflow">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Foreground" Value="#D8091526"/>
@@ -91,6 +93,60 @@
                             </Grid>
                             <TextBlock Text="{Binding Path=Description}" FontSize="12" FontFamily="Corbel" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#99091526" TextWrapping="WrapWithOverflow" />
                             <TextBlock Text="{Binding Path=LocalPath}" FontSize="10" FontFamily="Corbel" VerticalAlignment="Top" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#99091526" TextWrapping="WrapWithOverflow" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <Rectangle Fill="#FFFAFAFA" Height="19" Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,-12,0,0" Grid.Row="0" Grid.Column="3"/>
+            <TextBlock FontSize="16" FontFamily="Corbel" Height="19" Width="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-12,0,0" Foreground="#FF091526" Grid.Row="0" Grid.Column="3">
+                        Обязательные патчи
+            </TextBlock>
+            <ListView Name="NecessaryPatchesView" Background="#FFF0F0F0" BorderThickness="0" Grid.Row="2" Grid.Column="3">
+                <ListView.Template>
+                    <ControlTemplate>
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="12"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="8"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Path=Name}" Tag="{Binding Path=RemotePath}" MouseLeftButtonUp="OpenPatchLink" FontSize="14" FontFamily="Corbel" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontWeight="Bold"  TextWrapping="WrapWithOverflow">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground" Value="#D8091526"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="#FF198BFF"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Path=LocalPath}" FontSize="10" FontFamily="Corbel" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#99091526" TextWrapping="WrapWithOverflow" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

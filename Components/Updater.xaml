@@ -31,7 +31,7 @@
             FontSize="14"
             Grid.Row="2"
          >
-            Может быть, пора проверить обновления?
+            Сверка патчей...
         </TextBlock>
         <TextBlock
             HorizontalAlignment="Right"

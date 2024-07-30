@@ -71,12 +71,23 @@ namespace NobleLauncher.Models
             return new FileInfo(FullPath).Length;
         }
 
-        public Task<string> CalcCRC32Hash(Action<long> OnBlockRead) {
+        public DateTime GetLastModified()
+        {
+            if (!File.Exists(FullPath)) 
+                return DateTime.MinValue;
+            return new FileInfo(FullPath).LastWriteTime;
+        }
+        public string CalcCRC32Hash(Action<long> OnBlockRead) {
             return HashCalculator.CalcCRC32Hash(this, OnBlockRead);
         }
 
         public Task<long> GetRemoteSize() {
             return FileDownloader.GetFileSize(this);
+        }
+
+        public Task<DateTime> GetRemoteLastModified()
+        {
+            return FileDownloader.GetLastModified(this);
         }
 
         public Task LoadUpdated(Action<long, int> OnChunkLoaded) {

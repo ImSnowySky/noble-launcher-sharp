@@ -10,6 +10,7 @@ namespace NobleLauncher.Models
     static class FileDownloader
     {
         private static WebClient CurrentWebClient;
+
         public static async Task<long> GetFileSize(IUpdateable patch) {
             long size = 0;
             var request = HttpWebRequest.CreateHttp(patch.RemotePath);
@@ -17,8 +18,21 @@ namespace NobleLauncher.Models
             using (var response = await request.GetResponseAsync()) {
                 size = response.ContentLength;
             }
-
             return size;
+        }
+        
+        public static async Task<DateTime> GetLastModified(IUpdateable patch)
+        {
+            DateTime lastModified;
+            var request = HttpWebRequest.CreateHttp(patch.RemotePath);
+            request.Method = "HEAD";
+            using (var response = await request.GetResponseAsync())
+            {
+                string lastModifiedString = response.Headers[HttpResponseHeader.LastModified];
+                lastModified = DateTime.Parse(lastModifiedString);
+            }
+
+            return lastModified;
         }
 
         public static void CreateFolderForDownload(string fileDestination) {
